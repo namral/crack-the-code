@@ -1,0 +1,10 @@
+*.class
+*.pyc
+
+# Package Files #
+*.jar
+*.war
+*.ear
+.idea
+target
+*.iml
