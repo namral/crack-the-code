@@ -6,7 +6,7 @@ import main.nl.crack.trees.model.Node;
 
 /**
  * Created by Namrata Lele on 1/7/16.
- * Inorder traversal
+ * Inorder traversal Left , Head, Right
  * 1) Traverse left all the way
  * 2) Pop and print
  * 3) popped node has right ? Get the node and repeat 1 through three
