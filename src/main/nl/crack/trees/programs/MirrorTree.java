@@ -13,7 +13,6 @@ public class MirrorTree<T> {
 		if (node == null) {
 			return;
 		} else {
-
 			mirror(node.getLeft());
 			mirror(node.getRight());
             Node<T> temp = node.getLeft();

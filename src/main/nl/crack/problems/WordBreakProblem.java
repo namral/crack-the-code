@@ -26,6 +26,6 @@ public class WordBreakProblem {
         dictionary.add("dog");
         dictionary.add("cat");
         dictionary.add("god");
-        System.out.println("Does catgoddog belong to the dictionary ? " + belongsToDictionary("catgoddog"));
+        System.out.println("Is catgoddog formed by words in the dictionary ? " + belongsToDictionary("catgoddog"));
     }
 }
