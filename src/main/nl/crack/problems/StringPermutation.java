@@ -2,6 +2,7 @@ package main.nl.crack.problems;
 
 /**
  * Created by Namrata Lele on 2/14/16.
+ * http://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
  */
 public class StringPermutation {
     public static void main(String[] args) throws Exception {
@@ -10,15 +11,25 @@ public class StringPermutation {
     }
 
     public static void permutation(String str) {
-        permutation("", str);
+        permutation(str.toCharArray(), 0, str.length() - 1);
     }
 
-    private static void permutation(String prefix, String str) {
-        int n = str.length();
-        if (n == 0) System.out.println(prefix);
-        else {
-            for (int i = 0; i < n; i++)
-                permutation(prefix + str.charAt(i), str.substring(0, i) + str.substring(i+1, n));
+    private static void permutation(char[] input, int l, int r) {
+        if (l == r) {
+            System.out.println(input);
+        } else {
+            for (int i = l; i <= r; i++) {
+                swap(input, l,i);
+                permutation(input, l+1, r);
+                swap(input, l,i);
+            }
+
         }
+    }
+
+    private static void swap(char[] input, int i1, int i2) {
+        char temp = input[i1];
+        input[i1] = input[i2];
+        input[i2] = temp;
     }
 }
