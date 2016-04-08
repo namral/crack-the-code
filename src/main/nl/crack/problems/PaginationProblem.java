@@ -14,76 +14,76 @@ public class PaginationProblem {
   
   1/ we want 12 results per page
   2/ we want results sorted by score
-  3/ On each page, we want listings from different hosts
+  3/ On each page, we want listings from different cities
   
   
-"host_id,listing_id,score,city",
-"1,28,300.1,San Francisco",
-"4,5,209.1,San Francisco",
-"20,7,208.1,San Francisco",
-"23,8,207.1,San Francisco",
-"16,10,206.1,Oakland",
-"1,16,205.1,San Francisco",
-"1,31,204.6,San Francisco",
-"6,29,204.1,San Francisco",
-"7,20,203.1,San Francisco",
-"8,21,202.1,San Francisco",
-"2,18,201.1,San Francisco",
-"2,30,200.1,San Francisco",
-"15,27,109.1,Oakland",
-"10,13,108.1,Oakland",
-"11,26,107.1,Oakland",
-"12,9,106.1,Oakland",
-"13,1,105.1,Oakland",
-"22,17,104.1,Oakland",
-"1,2,103.1,Oakland",
-"28,24,102.1,Oakland",
-"18,14,11.1,San Jose",
-"6,25,10.1,Oakland",
-"19,15,9.1,San Jose",
-"3,19,8.1,San Jose",
-"3,11,7.1,Oakland",
-"27,12,6.1,Oakland",
-"1,3,5.1,Oakland",
-"25,4,4.1,San Jose",
-"5,6,3.1,San Jose",
-"29,22,2.1,San Jose",
-"30,23,1.1,San Jose"
+"city_id,deal_id,score",
+"1,28,300.1",
+"4,5,209.1",
+"20,7,208.1",
+"23,8,207.1",
+"16,10,206.1",
+"1,16,205.1",
+"1,31,204.6",
+"6,29,204.1",
+"7,20,203.1",
+"8,21,202.1",
+"2,18,201.1",
+"2,30,200.1",
+"15,27,109.1",
+"10,13,108.1",
+"11,26,107.1",
+"12,9,106.1",
+"13,1,105.1",
+"22,17,104.1",
+"1,2,103.1",
+"28,24,102.1",
+"18,14,11.1",
+"6,25,10.1",
+"19,15,9.1",
+"3,19,8.1",
+"3,11,7.1",
+"27,12,6.1",
+"1,3,5.1",
+"25,4,4.1",
+"5,6,3.1",
+"29,22,2.1",
+"30,23,1.1"
   
   */
 
     public static String[] input = {
-            "1,28,300.1,San Francisco",
-            "4,5,209.1,San Francisco",
-            "20,7,208.1,San Francisco",
-            "23,8,207.1,San Francisco",
-            "16,10,206.1,Oakland",
-            "1,16,205.1,San Francisco",
-            "1,31,204.6,San Francisco",
-            "6,29,204.1,San Francisco",
-            "7,20,203.1,San Francisco",
-            "8,21,202.1,San Francisco",
-            "2,18,201.1,San Francisco",
-            "2,30,200.1,San Francisco",
-            "15,27,109.1,Oakland",
-            "10,13,108.1,Oakland",
-            "11,26,107.1,Oakland",
-            "12,9,106.1,Oakland",
-            "13,1,105.1,Oakland",
-            "22,17,104.1,Oakland",
-            "1,2,103.1,Oakland",
-            "28,24,102.1,Oakland",
-            "18,14,11.1,San Jose",
-            "6,25,10.1,Oakland",
-            "19,15,9.1,San Jose",
-            "3,19,8.1,San Jose",
-            "3,11,7.1,Oakland",
-            "27,12,6.1,Oakland",
-            "1,3,5.1,Oakland",
-            "25,4,4.1,San Jose",
-            "5,6,3.1,San Jose",
-            "29,22,2.1,San Jose",
-            "30,23,1.1,San Jose"
+            "1,28,300.1",
+            "4,5,209.1",
+            "20,7,208.1",
+            "23,8,207.1",
+            "16,10,206.1",
+            "1,16,205.1",
+            "1,31,204.6",
+            "6,29,204.1",
+            "7,20,203.1",
+            "8,21,202.1",
+            "2,18,201.1",
+            "2,30,200.1",
+            "15,27,109.1",
+            "10,13,108.1",
+            "11,26,107.1",
+            "12,9,106.1",
+            "13,1,105.1",
+            "22,17,104.1",
+            "1,2,103.1",
+            "28,24,102.1",
+            "18,14,11.1",
+            "6,25,10.1",
+            "19,15,9.1",
+            "3,19,8.1",
+            "3,11,7.1",
+            "27,12,6.1",
+            "1,3,5.1",
+            "25,4,4.1",
+            "5,6,3.1",
+            "29,22,2.1",
+            "30,23,1.1"
     };
 
     public static List<List<String>> paginate(String[] input) {
@@ -116,11 +116,11 @@ public class PaginationProblem {
         for (int i = 0; i< input.length; i++) {
             String tuple = input[i];
             int k = tuple.indexOf(',');
-            String hostId = tuple.substring(0, k);
+            String cityId = tuple.substring(0, k);
 
-            List<String> value = getValue(hostId, index);
+            List<String> value = getValue(cityId, index);
             value.add(tuple);
-            index.put(hostId, value);
+            index.put(cityId, value);
         }
         return index;
     }

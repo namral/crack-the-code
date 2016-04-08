@@ -21,9 +21,12 @@ public class PowerSet {
         List<List<String>> powerSet = new ArrayList<>();
         for (int i = 0; i < input.size(); i++) {
             List<String> set = new ArrayList<>();
-            set.add(input.get(i));
+            for (int j = i; j < input.size(); j++) {
+                set.add(input.get(j));
+            }
+            powerSet.add(set);
+            powerSet.add(Arrays.asList(input.get(i)));
         }
-        return null;
+        return powerSet;
     }
-
 }
