@@ -55,28 +55,31 @@ public class JsonCreator {
         }
     }
 
-    public static String convertToJson(Dict entry) {
+    public static String convertToJson(DictEntry entry) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{");
         convertRec(entry, stringBuilder);
         return stringBuilder.toString();
     }
 
-    public static void convertRec(Dict input, StringBuilder result) {
+    public static void convertRec(DictEntry dictEntry, StringBuilder result) {
         int i = 0;
-        for (String key : input.getKeys()) {
-            if (i != 0) {
-                result.append(",");
-            }
-            i++;
-            result.append(key);
-            result.append(":");
-            DictEntry entry = input.get(key);
-            if (entry.isDict()) {
-                result.append("{");
-                convertRec((Dict) entry, result);
-            } else {
-                result.append(((StringWrapper)entry).getValue());
+        if (dictEntry.isDict()) {
+            Dict input = (Dict) dictEntry;
+            for (String key : input.getKeys()) {
+                if (i != 0) {
+                    result.append(",");
+                }
+                i++;
+                result.append(key);
+                result.append(":");
+                DictEntry entry = input.get(key);
+                if (entry.isDict()) {
+                    result.append("{");
+                    convertRec(entry, result);
+                } else {
+                    result.append(((StringWrapper) entry).getValue());
+                }
             }
         }
         result.append("}");
@@ -91,7 +94,7 @@ public class JsonCreator {
         Map<String, DictEntry> map = new HashMap<>();
         map.put("a", new StringWrapper("apple"));
         map.put("b", dict1);
-        Dict dict = new Dict(map);
+        DictEntry dict = new Dict(map);
 
         System.out.println("Json string : " + convertToJson(dict));
     }
