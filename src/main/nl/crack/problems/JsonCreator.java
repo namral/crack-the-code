@@ -8,8 +8,8 @@ import java.util.Set;
  * Created by Namrata on 4/11/16.
  *
  * Create json for
- *  dict(“a”: “apple”, “b”: dict(“b”: “blueberry”, “c”: “cranberry”))
- *  “{a:apple,b:{b:blueberry,c:cranberry}}”
+ *  Input : dict(“a”: “apple”, “b”: dict(“b”: “blueberry”, “c”: “cranberry”))
+ *  Expected output String : “{a:apple,b:{b:blueberry,c:cranberry}}”
  */
 
 
@@ -55,6 +55,38 @@ public class JsonCreator {
         }
     }
 
+    /*  Input : dict(“a”: “apple”, “b”: dict(“b”: “blueberry”, “c”: “cranberry”))
+     *  Expected output String : “{a:apple,b:{b:blueberry,c:cranberry}}”
+     */
+    public static void main(String[] args) {
+        Map<String, DictEntry> map1 = new HashMap<>();
+        map1.put("b", new StringWrapper("blueberry"));
+        map1.put("c", new StringWrapper("cranberry"));
+        DictEntry dict1 = new Dict(map1);
+
+        Map<String, DictEntry> map = new HashMap<>();
+        map.put("a", new StringWrapper("apple"));
+        map.put("b", dict1);
+        DictEntry dict = new Dict(map);
+
+        System.out.println("Json string : " + convertToJson(dict));
+    }
+
+    public static String convertToJson1(DictEntry entry) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+
+        for (String key : ((Dict)entry).getKeys()) {
+            DictEntry subentry = ((Dict)entry).get(key);
+            if (!subentry.isDict()) {
+                sb.append(key + ":" + ((StringWrapper)subentry).getValue() + ",");
+            } else {
+                sb.append(key + ":" + convertToJson1(subentry));
+            }
+        }
+        sb.append("}");
+        return sb.toString();
+    }
     public static String convertToJson(DictEntry entry) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{");
@@ -83,19 +115,5 @@ public class JsonCreator {
             }
         }
         result.append("}");
-    }
-
-    public static void main(String[] args) {
-        Map<String, DictEntry> map1 = new HashMap<>();
-        map1.put("b", new StringWrapper("blueberry"));
-        map1.put("c", new StringWrapper("cranberry"));
-        DictEntry dict1 = new Dict(map1);
-
-        Map<String, DictEntry> map = new HashMap<>();
-        map.put("a", new StringWrapper("apple"));
-        map.put("b", dict1);
-        DictEntry dict = new Dict(map);
-
-        System.out.println("Json string : " + convertToJson(dict));
     }
 }
